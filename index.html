@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+
+<body>
+    <p>First paragraph</p>
+    <p>Second paragraph</p>
+<script>
+</script>
+    <script>
+            function getRandomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+        d3.select("p").style("color", "green");
+        var svgContainer = d3.select("body").append("svg")
+                                    .attr("width", 1000)
+                                    .attr("height", 1000);
+
+//Draw the Circle
+var i = 10;
+console.log(Math.random(30))
+var lastVal = {};
+var coords = {}
+coords.x1 = 0;
+coords.x2 = 0;
+coords.y1 = 0;
+coords.y2 = 0;
+
+d3.select("body")
+    .on("keydown", function() {
+        // var randValue = 
+        // var randValue2 = getRandomInt(0, 30 +  i);
+        coords.x1 = getRandomInt(0, 30 +  i);
+        coords.y1 = getRandomInt(0, 30 +  i);
+        var letter = svgContainer.append("text").attr("x", coords.x1).attr("y", coords.y1).text(d3.event.key).attr("font-size", "20px")
+        if (coords.x2 > 0 && coords.y2 > 0) {
+            // svgContainer.append("path").attr("d", `M${lastVal.x} ${lastVal.y} L${randValue} ${randValue2} Z`)
+            svgContainer.append("line")          // attach a line
+            .style("stroke", "black")  // colour the line
+            .attr("x1", coords.x2)     // x position of the first end of the line
+            .attr("y1", coords.y2)      // y position of the first end of the line
+            .attr("x2", coords.x1)     // x position of the second end of the line
+            .attr("y2", coords.y1);
+        }
+        coords.x2 = coords.x1;
+        coords.y2 = coords.y1
+        i += 10;
+    })
+
+// var p = d3.select("body")
+//   .selectAll("p")
+//   .data([4, 8, 15, 16, 23, 42])
+//     .text(function(d) { return d; });
+//     // Enter…
+// p.enter().append("p")
+//     .text(function(d) { return d; });
+
+// Exit…
+// p.exit().remove();
+    </script>
+</body>
+
+</html>
